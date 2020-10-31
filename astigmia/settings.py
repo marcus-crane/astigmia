@@ -39,6 +39,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'lobby.apps.LobbyConfig',
     'dashboard.apps.DashboardConfig',
+    'django_celery_results',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -146,3 +147,6 @@ STATIC_URL = '/static/'
 MV_USERNAME = config['Account']['Username']
 MV_PASSWORD = config['Account']['Password']
 MV_API_BASE = config['API']['BaseURL']
+
+# Celery
+CELERY_RESULTS_BACKEND = 'django-db'
