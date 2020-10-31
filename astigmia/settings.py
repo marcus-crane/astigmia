@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import configparser
+import os
 from pathlib import Path
 
 # Import sensitive configuration from an INI file
@@ -60,7 +61,9 @@ ROOT_URLCONF = 'astigmia.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'astigmia/templates/shared'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,6 +87,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 AUTH_USER_MODEL = 'lobby.user'
+
+LOGIN_REDIRECT_URL = '/dashboard'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
