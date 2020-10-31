@@ -3,4 +3,17 @@
 {% block content %}
     <h1>Welcome {{ request.user.first_name }}</h1>
     <p>Your next session is {{ request.user.next_session }}</p>
+    <p>You only have {{ request.user.get_remaining_weight }}kg to gain in order to meet your current goal!</p>
+
+    <h3>Goals for the week</h3>
+    {% for goal in current_goals %}
+        <li>{{ goal }}</li>
+    {% endfor %}
+
+    <h3>Intake Goals</h3>
+    <ul>
+        <li>Carbs: {{ request.user.target_carbs }}</li>
+        <li>Protein: {{ request.user.target_protein }}</li>
+        <li>Fat: {{ request.user.target_fat }}</li>
+    </ul>
 {% endblock %}
