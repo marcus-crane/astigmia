@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'lobby.apps.LobbyConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -69,6 +70,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'astigmia.wsgi.application'
 
+
+# Authentication overrides
+# https://docs.djangoproject.com/en/3.1/topics/auth/customizing/#authentication-backends
+
+AUTHENTICATION_BACKENDS = [
+    'lobby.auth_backend.MyVisionBackend'
+]
+
+AUTH_USER_MODEL = 'lobby.user'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -118,3 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# MyVision settings
+MV_USERNAME = 'myusername'
+MV_PASSWORD = 'abc123'
