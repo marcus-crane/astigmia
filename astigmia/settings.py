@@ -10,7 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import configparser
 from pathlib import Path
+
+# Import sensitive configuration from an INI file
+config = configparser.ConfigParser()
+config.read('astigmia/config.ini')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -130,5 +135,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # MyVision settings
-MV_USERNAME = 'myusername'
-MV_PASSWORD = 'abc123'
+MV_USERNAME = config['Account']['Username']
+MV_PASSWORD = config['Account']['Password']
+MV_API_BASE = config['API']['BaseURL']
