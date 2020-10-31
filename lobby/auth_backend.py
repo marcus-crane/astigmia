@@ -1,7 +1,32 @@
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import BaseBackend
+import requests
+
 from lobby.models import User
+
+
+def retrieve_user_from_api(username, password):
+    """
+    The MyVision API uses integers to reflect the status
+    of a request. Here's a few of the ones I've spotted
+
+        4: You must enter both a username and password
+        5: Please enter a valid username and password
+        10: Successfully performed action
+        12: Unexpected field
+    """
+    url = f'{settings.MV_API_BASE}/proxy/login'
+    payload = { 'username': username, 'password': password }
+    r = requests.post(url, data=payload)
+    data = r.json()
+    # TODO: This should make use of `.get` and handle network failure
+    if data['res']['status'] == 10:
+        return data['data']
+    return None
 
 
 class MyVisionBackend(BaseBackend):
@@ -45,8 +70,21 @@ class MyVisionBackend(BaseBackend):
             try:
                 user = get_user_model().objects.get(username=username)
             except User.DoesNotExist:
+                user_data = retrieve_user_from_api(username, password)
+                # TODO: This feels a bit dirty so parsing should really happen somewhere else!!
+                session_time = user_data['user']['getprofilemerged']['profile']['nextsession']
+                parsed_session_time = datetime.strptime(session_time, '%d/%m/%Y %I:%M:%S %p')
+                # The API returns a date with no timezone which is nuts?
+                # For now I'm just forcing it to my timezone as I'm the only user
+                # TODO: This should really be stored as UTC in future
+                tzaware_session_time = parsed_session_time.astimezone(ZoneInfo(key='Pacific/Auckland'))
                 user = User(
-                    username=username
+                    username=user_data['user']['username'],
+                    first_name=user_data['user']['getprofilemerged']['profile']['firstname'],
+                    last_name=user_data['user']['getprofilemerged']['profile']['lastname'],
+                    email=user_data['user']['email'],
+                    next_session=tzaware_session_time,
+                    avatar=user_data['user']['getprofilemerged']['profile']['profileimage'],
                 )
                 user.save()
             return user

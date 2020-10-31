@@ -3,4 +3,5 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    pass
+    next_session = models.DateTimeField()
+    avatar = models.URLField()
