@@ -2,4 +2,5 @@
 
 {% block content %}
     <h1>Welcome {{ request.user.first_name }}</h1>
+    <p>Your next session is {{ request.user.next_session }}</p>
 {% endblock %}

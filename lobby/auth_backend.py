@@ -84,6 +84,7 @@ class MyVisionBackend(BaseBackend):
                     last_name=user_data['user']['getprofilemerged']['profile']['lastname'],
                     email=user_data['user']['email'],
                     next_session=tzaware_session_time,
+                    signed_up=user_data['user']['getprofilemerged']['profile']['startdate'],
                     avatar=user_data['user']['getprofilemerged']['profile']['profileimage'],
                 )
                 user.save()
