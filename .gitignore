@@ -5,3 +5,4 @@ __pycache__
 astigmia/config.ini
 celerybeat-schedule
 celerybeat.pid
+venv
