@@ -4,6 +4,7 @@ from zoneinfo import ZoneInfo
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import BaseBackend
+
 import requests
 
 from lobby.models import User
@@ -20,7 +21,7 @@ def retrieve_user_from_api(username, password):
         12: Unexpected field
     """
     url = f'{settings.MV_API_BASE}/proxy/login'
-    payload = { 'username': username, 'password': password }
+    payload = {'username': username, 'password': password}
     r = requests.post(url, data=payload)
     data = r.json()
     # TODO: This should make use of `.get` and handle network failure
