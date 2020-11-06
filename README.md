@@ -57,6 +57,8 @@ I did mention in an email once that I had intended to build such a thing.
 ## Things to do
 
 * Upgrade Heroku deployment to Hobbyist plan given Dyno will likely spin down
+* Migrate away from Heroku in favour of Github Actions (auto deploy doesn't seem to work anyway)
+* Add PR steps such as running unit tests + linting
 * Consider replacing bootstrap since I don't like having jQuery in the mix (tailwind?)
 * Document API quirks
 * Add some unit tests (should have really been done in the first place heh)
