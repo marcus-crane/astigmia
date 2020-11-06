@@ -14,6 +14,8 @@ import configparser
 import os
 from pathlib import Path
 
+import django_heroku
+
 # Import sensitive configuration from an INI file
 config = configparser.ConfigParser()
 config.read('astigmia/config.ini')
@@ -153,3 +155,6 @@ MV_API_BASE = os.getenv('MV_API_BASE')
 
 # Celery
 CELERY_RESULTS_BACKEND = 'django-db'
+
+# Enable django-heroku (always keep this at the bottom)
+django_heroku.settings(locals())
