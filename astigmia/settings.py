@@ -137,6 +137,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+"""
+For now, we only have one user so no value in having eg; an nginx instance caching static assets
+Also, given we're currently on Heroku, I'm not sure this has much value as a setting re: pointing
+at the filesystem
+"""
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+STATICFILES_DIRS = []
 
 # MyVision settings (check env first followed by config for local dev)
 MV_USERNAME = os.getenv('MV_USERNAME')
