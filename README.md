@@ -63,3 +63,4 @@ I did mention in an email once that I had intended to build such a thing.
 * Extract API calls into their own standalone Python API client
 * Wire up celery background tasks with Heroku
 * Verify how the site looks on mobile
+* Add developer setup steps
