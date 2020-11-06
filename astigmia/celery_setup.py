@@ -17,7 +17,7 @@ app.conf.beat_schedule = {
     },
     'fetch-notifications': {
         'task': 'fetch-notifications',
-        'schedule': 60 * 60 * 3
+        'schedule': 60 * 15
     },
 }
 
