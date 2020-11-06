@@ -153,8 +153,17 @@ MV_USERNAME = os.getenv('MV_USERNAME')
 MV_PASSWORD = os.getenv('MV_PASSWORD')
 MV_API_BASE = os.getenv('MV_API_BASE')
 
-# Celery
+# Celery (mostly recommended settings from https://www.cloudamqp.com/docs/celery.html)
+CELERY_BROKER_CONNECTION_TIMEOUT = 30
+CELERY_BROKER_POOL_LIMIT = 1
+CELERY_BROKER_URL = os.getenv('CLOUDAMQP_URL', 'amqp://localhost')
+CELERY_BROKER_HEARTBEAT = None
 CELERY_RESULTS_BACKEND = 'django-db'
+CELERY_TASK_TIME_LIMIT = 5 * 60
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TIMEZONE = 'Pacific/Auckland'
+CELERYD_CONCURRENCY = 50
+CELERYD_PREFETCH_MULTIPLIER = 1
 
 # Enable django-heroku (always keep this at the bottom)
 django_heroku.settings(locals())
