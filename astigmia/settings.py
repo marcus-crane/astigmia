@@ -139,9 +139,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # MyVision settings (check env first followed by config for local dev)
-MV_USERNAME = os.getenv('MV_USERNAME', config['Account']['Username'])
-MV_PASSWORD = os.getenv('MV_PASSWORD', config['Account']['Password'])
-MV_API_BASE = os.getenv('MV_API_BASE', config['API']['BaseURL'])
+MV_USERNAME = os.getenv('MV_USERNAME')
+MV_PASSWORD = os.getenv('MV_PASSWORD')
+MV_API_BASE = os.getenv('MV_API_BASE')
 
 # Celery
 CELERY_RESULTS_BACKEND = 'django-db'

@@ -1,6 +1,0 @@
-[Account]
-Username = username
-Password = password
-
-[API]
-BaseURL = http://example.com

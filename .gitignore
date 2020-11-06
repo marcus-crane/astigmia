@@ -2,7 +2,7 @@
 .DS_Store
 __pycache__
 *.sqlite3
-astigmia/config.ini
+.env
 celerybeat-schedule
 celerybeat.pid
 venv
