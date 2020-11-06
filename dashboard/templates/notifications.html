@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Notifications</h1>
+
+    <table>
+        <tr>
+            <th>Created</th>
+            <th>Message</th>
+        </tr>
+        {% for notification in notifications %}
+        <tr>
+            <td><a href="#">X</a></td>
+            <td>{{ notification.created_at }}</td>
+            <td>{{ notification.message }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

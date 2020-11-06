@@ -14,7 +14,11 @@ app.conf.beat_schedule = {
     'check-next-session': {
         'task': 'lobby.check-next-session',
         'schedule': 60 * 60 * 3
-    }
+    },
+    'fetch-notifications': {
+        'task': 'fetch-notifications',
+        'schedule': 60 * 60 * 3
+    },
 }
 
 

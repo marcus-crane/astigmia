@@ -30,6 +30,7 @@ def check_next_session():
 def update_targets_and_goals():
     user = User.objects.get(username=settings.MV_USERNAME)
     user_data = get_user_profile()
+    # TODO: Surely there's some sort of shorthand that can be used instead
     user.target_carbs = user_data['user']['getlogin']['sectionfooddiary']['targetcarbohydrate']
     user.target_protein = user_data['user']['getlogin']['sectionfooddiary']['targetprotein']
     user.target_fat = user_data['user']['getlogin']['sectionfooddiary']['targetfat']
@@ -39,6 +40,7 @@ def update_targets_and_goals():
     user.save()
 
 
+# TODO: Move all of this stuff into its own API client rather than exposing the externals inside the task module
 def retrieve_notifications_from_api(token, user_id, page=1):
     """
     The MyVision API uses integers to reflect the status
@@ -54,7 +56,6 @@ def retrieve_notifications_from_api(token, user_id, page=1):
     r = requests.get(url, headers=headers)
     data = r.json()
     # TODO: This should make use of `.get` and handle network failure
-    print(data['res'])
     if int(data['res']['success']) == 10:
         return data['data']['notifications']
     return None
@@ -69,7 +70,8 @@ def save_notifications(token, user_id, page):
             id=notification.get('_id'),
             message=notification.get('message'),
             created_at=datetime.strptime(
-                notification.get('created_at'), '%Y-%m-%dT%I:%M:%S.%fZ').astimezone(ZoneInfo(key='Pacific/Auckland')
+                # TODO: Timezone parsing should be done client side (although this is only an NZ/AUS gym so...
+                notification.get('created_at'), '%Y-%m-%dT%H:%M:%S.%fZ').astimezone(ZoneInfo(key='Pacific/Auckland')
             )
         )
     if response['hasNextPage']:
@@ -78,7 +80,9 @@ def save_notifications(token, user_id, page):
 
 @shared_task()
 def fetch_notifications():
+    # TODO: Persist token somewhere either in memory or in eg; redis/rabbitmq
     token = get_user_profile()['token']
+    # TODO: User ID shouldn't be hardcoded but it works for now
     save_notifications(token, user_id=138516, page=1)
 
 

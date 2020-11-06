@@ -3,8 +3,19 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
+    """
+    This is an extension of a normal Django user model but with properties
+    found within the MV API
+
+    While you could make a User model that inherits all of this metadata
+    as a different object, I'd rather it just be part of the user directly
+
+    Similarly, we are dealing with an actual representation of a User after
+    all so it makes sense to get all of the methods and fields for free
+    such as `get_full_name()` and all that.
+    """
     # User metadata
-    next_session = models.DateTimeField() # TODO: This should be fetched periodically, could use Celery
+    next_session = models.DateTimeField()
     avatar = models.URLField()
     signed_up = models.DateTimeField()
 
