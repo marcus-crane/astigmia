@@ -87,6 +87,12 @@ class MyVisionBackend(BaseBackend):
                     next_session=tzaware_session_time,
                     signed_up=user_data['user']['getprofilemerged']['profile']['startdate'],
                     avatar=user_data['user']['getprofilemerged']['profile']['profileimage'],
+                    target_carbs=user_data['user']['getlogin']['sectionfooddiary']['targetcarbohydrate'],
+                    target_protein=user_data['user']['getlogin']['sectionfooddiary']['targetprotein'],
+                    target_fat=user_data['user']['getlogin']['sectionfooddiary']['targetfat'],
+                    current_goals=user_data['user']['getlogin']['sectiongoals']['weeklygoal'],
+                    target_weight=user_data['user']['getlogin']['sectiongoals']['targetweight'],
+                    current_weight=user_data['user']['getlogin']['sectiongoals']['currentweight'],
                 )
                 user.save()
             return user
