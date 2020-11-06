@@ -7,10 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item {% if request.resolver_match.route == 'dashboard/' %}active{% endif %}">
-                <a class="nav-link" href="/dashboard/">Dashboard</a>
+                <a class="nav-link" href="{% url 'dashboard_index' %}">Dashboard</a>
             </li>
             <li class="nav-item {% if request.resolver_match.route == 'meals/' %}active{% endif %}">
-                <a class="nav-link" href="/meals/">Meals</a>
+                <a class="nav-link" href="#">Meals</a>
             </li>
         </ul>
         <ul class="navbar-nav">
@@ -20,9 +20,9 @@
                     {{ request.user.username }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/dashboard/profile/">Profile</a>
-                    <a class="dropdown-item" href="/dashboard/notifications">Notifications</a>
-                    <a class="dropdown-item" href="/logout/">Log out</a>
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="{% url 'notifications' %}">Notifications</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
                 </div>
             </li>
         </ul>
