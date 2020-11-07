@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from dashboard.models import Notification
+from .models import Notification
 
 
 # TODO: Is there middleware to have login_required on every view within a module?

@@ -4,8 +4,8 @@ from zoneinfo import ZoneInfo
 from celery import shared_task
 from django.conf import settings
 
-from lobby.auth_backend import retrieve_user_from_api # TODO: This should definitely be pulled out from the auth backend
-from lobby.models import User
+from .auth_backend import retrieve_user_from_api # TODO: This should definitely be pulled out from the auth backend
+from .models import User
 
 
 def get_user_profile():
