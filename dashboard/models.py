@@ -13,3 +13,9 @@ class Notification(models.Model):
     id = models.CharField(primary_key=True, editable=False, max_length=40)
     created_at = models.DateTimeField()
     message = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.message
+
+    def __repr__(self):
+        return self.__str__()
