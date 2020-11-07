@@ -10,17 +10,6 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.autodiscover_tasks()
 
-app.conf.beat_schedule = {
-    'check-next-session': {
-        'task': 'lobby.check-next-session',
-        'schedule': 60 * 60 * 3
-    },
-    'fetch-notifications': {
-        'task': 'dashboard.fetch-notifications',
-        'schedule': 60 * 5
-    },
-}
-
 
 @app.task(bind=True)
 def debug_task(self):

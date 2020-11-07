@@ -155,6 +155,16 @@ MV_PASSWORD = os.getenv('MV_PASSWORD')
 MV_API_BASE = os.getenv('MV_API_BASE')
 
 # Celery (mostly recommended settings from https://www.cloudamqp.com/docs/celery.html)
+CELERY_BEAT_SCHEDULE = {
+    'check-next-session': {
+        'task': 'lobby.tasks.check-next-session',
+        'schedule': 60 * 60 * 3
+    },
+    'fetch-notifications': {
+        'task': 'dashboard.tasks.fetch-notifications',
+        'schedule': 60 * 5
+    },
+}
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 CELERY_BROKER_CONNECTION_TIMEOUT = 30
 CELERY_BROKER_POOL_LIMIT = 1
