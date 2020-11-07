@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import configparser
+from datetime import timedelta
 import os
 from pathlib import Path
 
@@ -158,11 +159,15 @@ MV_API_BASE = os.getenv('MV_API_BASE')
 CELERY_BEAT_SCHEDULE = {
     'check-next-session': {
         'task': 'lobby.tasks.check_next_session',
-        'schedule': 60 * 60 * 3
+        'schedule': timedelta(hours=3)
     },
     'fetch-notifications': {
         'task': 'dashboard.tasks.fetch_notifications',
-        'schedule': 60 * 5
+        'schedule': timedelta(hours=3)
+    },
+    'update-goals': {
+        'task': 'dashboard.tasks.update_targets_and_goals',
+        'schedule': timedelta(hours=12)
     },
 }
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
