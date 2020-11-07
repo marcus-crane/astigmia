@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'lobby.apps.LobbyConfig',
     'dashboard.apps.DashboardConfig',
     'django_celery_results',
+    'django_celery_beat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -154,6 +155,7 @@ MV_PASSWORD = os.getenv('MV_PASSWORD')
 MV_API_BASE = os.getenv('MV_API_BASE')
 
 # Celery (mostly recommended settings from https://www.cloudamqp.com/docs/celery.html)
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 CELERY_BROKER_CONNECTION_TIMEOUT = 30
 CELERY_BROKER_POOL_LIMIT = 1
 CELERY_BROKER_URL = os.getenv('CLOUDAMQP_URL', 'amqp://localhost')
