@@ -159,7 +159,7 @@ MV_API_BASE = os.getenv('MV_API_BASE')
 # Celery (mostly recommended settings from https://www.cloudamqp.com/docs/celery.html)
 CELERY_BEAT_SCHEDULE = {
     'check-next-session': {
-        'task': 'lobby.tasks.check_next_session',
+        'task': 'dashboard.tasks.check_next_session',
         'schedule': timedelta(hours=3)
     },
     'fetch-notifications': {
