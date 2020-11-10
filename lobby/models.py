@@ -29,5 +29,8 @@ class User(AbstractUser):
     target_protein = models.IntegerField()
     target_fat = models.IntegerField()
 
+    # Meal metadata
+    favourited_food = models.ManyToManyField(to='meals.Food', related_name='favourited_by')
+
     def get_remaining_weight(self):
         return round(self.target_weight - self.current_weight, 2)

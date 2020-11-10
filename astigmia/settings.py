@@ -40,6 +40,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'lobby.apps.LobbyConfig',
     'dashboard.apps.DashboardConfig',
+    'meals.apps.MealsConfig',
     'django_celery_results',
     'django_celery_beat',
     'django.contrib.admin',
