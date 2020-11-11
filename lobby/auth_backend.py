@@ -66,6 +66,7 @@ class MyVisionBackend(BaseBackend):
         """
         login_valid = (settings.MV_USERNAME == username)
         password_valid = (settings.MV_PASSWORD == password)
+        print(login_valid, password_valid)
         if login_valid and password_valid:
             try:
                 user = get_user_model().objects.get(username=username)

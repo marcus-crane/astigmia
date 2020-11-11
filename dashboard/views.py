@@ -15,3 +15,8 @@ def index(request):
 def notifications(request):
     # TODO: Switch to a class based view
     return render(request, 'notifications.html', {'notifications': Notification.objects.all()})
+
+
+@login_required(login_url='/login')
+def profile(request):
+    return render(request, 'profile.html', {'user': request.user})
