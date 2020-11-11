@@ -2,15 +2,19 @@ from datetime import datetime, timedelta
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.views.generic.base import TemplateView
 
 from .models import Food, Meal, MacroGoal
 
+
 @login_required(login_url='/login')
-def index(request):
-    context = {
-        'today': datetime.now().strftime('%Y-%m-%d')
-    }
-    return render(request, 'meals.html', context)  # TODO: Templating paths are not set up correctly
+class MealHomeView(TemplateView):
+    template_name = "meals.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['today'] = datetime.now().strftime('%Y-%m-%d')
+        return context
 
 
 @login_required(login_url='/login')
