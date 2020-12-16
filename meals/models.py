@@ -72,8 +72,8 @@ class Food(models.Model):
     """
     name = models.CharField(max_length=200)
     is_alcohol = models.BooleanField(default=False)
-    serving_unit = models.CharField(max_length=10)
-    serving_size = models.FloatField(max_length=10)
+    serving_unit = models.CharField(max_length=10, null=True)
+    serving_size = models.FloatField(max_length=10, null=True)
 
     # Macros in one unit (ie 1g / 1mL)
     calcium = models.FloatField(null=True)

@@ -18,6 +18,6 @@ class DateConverter:
 register_converter(DateConverter, 'yyyy')
 
 urlpatterns = [
-    path('', views.MealHomeView.as_view(), name='meals_index'),
+    path('', views.index, name='meals_index'),
     path('date/<yyyy:day>/', views.date, name='date')
 ]
